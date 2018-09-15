@@ -13,11 +13,22 @@ module.exports = {
             name: {
                 type: Sequelize.STRING
             },
+            description: {
+                type: Sequelize.STRING
+            },
             userId: {
                 type: Sequelize.INTEGER,
                 onDelete: 'CASCADE',
                 references: {
                     model: 'Users',
+                    key: 'id'
+                }
+            },
+            docTypeId: {
+                type: Sequelize.INTEGER,
+                onDelete: 'CASCADE',
+                references: {
+                    model: 'DocTypes',
                     key: 'id'
                 }
             },

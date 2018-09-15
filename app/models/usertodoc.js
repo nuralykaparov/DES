@@ -1,35 +1,43 @@
-module.exports = function(sequelize, DataTypes) {
-  var UserToDoc = sequelize.define('UserToDoc', {
+module.exports = function (sequelize, DataTypes) {
+    var UserToDoc = sequelize.define('UserToDoc', {
 
-  id: {
-    autoIncrement: true,
-    primaryKey: true,
-    type: DataTypes.INTEGER,
-  },
-  url: {
-    type: DataTypes.STRING,
-  },
-  name: {
-    type: DataTypes.STRING,
-  }
-  });
+        id: {
+            autoIncrement: true,
+            primaryKey: true,
+            type: DataTypes.INTEGER,
+        },
+        url: {
+            type: DataTypes.STRING,
+        },
+        name: {
+            type: DataTypes.STRING,
+        },
+        description: {
+            type: DataTypes.STRING,
+        },
 
-  UserToDoc.associate = function(models){
-    UserToDoc.belongsTo(models.User,{
-      foreignKey: 'userId'
     });
 
-    UserToDoc.hasMany(models.SendDocToUser,{
-      foreignKey: {
-        name: 'id',
-      }
-    });
-    UserToDoc.hasMany(models.archieve,{
-      foreignKey: {
-        name: 'id',
-      }
-    });
-  }
+    UserToDoc.associate = function (models) {
+        UserToDoc.belongsTo(models.User, {
+            foreignKey: 'userId'
+        });
 
-  return UserToDoc;
+        SendDocToUser.belongsTo(models.DocType, {
+            foreignKey: 'docTypeId',
+        });
+
+        UserToDoc.hasMany(models.SendDocToUser, {
+            foreignKey: {
+                name: 'id',
+            }
+        });
+        UserToDoc.hasMany(models.archieve, {
+            foreignKey: {
+                name: 'id',
+            }
+        });
+    }
+
+    return UserToDoc;
 };

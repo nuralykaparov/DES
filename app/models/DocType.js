@@ -12,7 +12,7 @@ module.exports = function(sequelize, DataTypes) {
     });
 
     DocType.associate = function(models) {
-        DocType.hasMany(models.SendDocToUser,{
+        DocType.hasMany(models.UserToDoc,{
             foreignKey: {
                 name: 'id',
             }

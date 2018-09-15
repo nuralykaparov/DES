@@ -18,9 +18,6 @@ module.exports = function (sequelize, DataTypes) {
             foreignKey: 'statusId',
         });
 
-        SendDocToUser.belongsTo(models.DocType, {
-            foreignKey: 'docTypeId',
-        });
 
         SendDocToUser.belongsTo(models.User, {
             foreignKey: 'getUserId'

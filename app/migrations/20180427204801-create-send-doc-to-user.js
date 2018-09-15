@@ -46,14 +46,6 @@ module.exports = {
                     key: 'id'
                 }
             },
-            docTypeId: {
-                type: Sequelize.INTEGER,
-                onDelete: 'CASCADE',
-                references: {
-                    model: 'DocTypes',
-                    key: 'id'
-                }
-            },
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE
