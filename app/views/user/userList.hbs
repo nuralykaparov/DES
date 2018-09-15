@@ -1,0 +1,25 @@
+
+
+<div class="col-md">
+  <div class="card mb-2 flex-row align-items-center">
+    <a class="btn btn-outline-info" href="/">Главная</a> >
+    <a class="btn btn-outline-info" href="/user/allUsers">Поиск Пользователь</a>
+  </div>
+</div>
+
+<div class="col-md-9">
+</div>
+<div class="col-md-7">
+  <div class="card">
+    <div class="card-body">
+      <div class="card">
+        <ul class="list-group list-group-flush">
+          <h6 class="my-0"> Пользователи</h6>
+          {{#each userList}}
+            <a href="/user/showUser/{{id}}">{{firstname}} {{lastname}}</a>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div> <!-- .col-sm -->

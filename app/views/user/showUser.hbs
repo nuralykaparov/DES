@@ -1,0 +1,108 @@
+<div class="col-md">
+  <div class="card mb-2 flex-row align-items-center">
+    <a class="btn btn-outline-info" href="/">Главная</a> >
+    <a class="btn btn-outline-info" href="/user/allUsers">Поиск Пользователь</a>>
+    <a class="btn btn-outline-info" href="/user/showUser/{{user.id}}">Пользователь</a>
+
+  </div>
+</div>
+
+<div class="col-md-9">
+</div>
+<div class="col-md-7">
+  <div class="card">
+    <div class="card-body">
+      <div class="card">
+        <ul class="list-group list-group-flush">
+          <div class="col-sm-6">
+            <h6 class="my-0">Пользователь</h6>
+
+            {{#if message.length  }}
+                <div class="alert alert-danger">{{ message }}</div>
+            {{/if }}
+
+              <div class="well">
+                  <table>
+                    <tr>
+                      <td>Id</td>
+                      <td>:{{user.id}}</td>
+                    </tr>
+                    <tr>
+                      <td>Firstname</td>
+                      <td>:{{ user.firstname }}</td>
+                    </tr>
+                    <tr>
+                      <td>Lastname</td>
+                      <td>:{{ user.lastname }}</td>
+                    </tr>
+                    <tr>
+                      <td>Email</td>
+                      <td>:{{ user.email }}</td>
+                    </tr>
+                    <tr>
+                      <td>Phone</td>
+                      <td>:{{ user.phone }}</td>
+                    </tr>
+                    <tr>
+                      <td>Birhdate</td>
+                      <td>:{{ user.date_birth }}</td>
+                    </tr>
+                  </table>
+              </div>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div> <!-- .col-sm -->
+
+
+
+<div class="col-md-5">
+  <ul class="list-group mb-3">
+    <li class="list-group-item d-flex justify-content-between lh-condensed">
+      <div class="">
+        <a href="/user/editPasswordUser/{{user.id}}" class="btn btn-default btn-sm" >Изменить пароль пользователя</a><br>
+        <!-- <form class="" action="/user/destroyUser/{{user.id}}" method="post">
+          <input type="submit" name="" value="Удалить">
+        </form> -->
+      </div>
+    </li>
+    </li>
+</div>
+
+
+<div class="col-md-5">
+  <ul class="list-group mb-3">
+    <li class="list-group-item d-flex justify-content-between lh-condensed">
+      <div class="">
+        <h6 class="my-0">Достижения</h6>
+        <ul id="user-achievement-list" class="list-group">
+          <li id="achievement-subject-id" class="d-flex list-group-item">
+          </li>
+        </ul>
+      </div>
+    </li>
+    </li>
+</div>
+
+<div class="col-md-5">
+  <ul class="list-group mb-3">
+    <li class="list-group-item d-flex justify-content-between lh-condensed">
+      <div class="">
+        <h6 class="my-0">Достижения По Урокам</h6>
+        <ul  class="list-group">
+          <li  class="d-flex list-group-item">
+            Закончил в {{average}}%
+          </li>
+        </ul>
+      </div>
+    </li>
+    </li>
+</div>
+
+
+
+<script type="text/javascript">
+  showUserTrophies({{user.id}});
+</script>

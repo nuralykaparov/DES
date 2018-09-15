@@ -1,0 +1,161 @@
+.button{
+      background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    position: absolute;
+}
+.wrapper{
+  text-align: center;
+  margin-left: -80px;
+}
+
+.navbar-dark .navbar-brand {
+    color: #fff;
+    margin-left: -80px;
+}
+@font-face {
+    font-family: Bip; src: url('/fonts/bip_regular.ttf');
+}
+#myVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+
+body {
+  padding-top: 54px;
+}
+
+@media (min-width: 992px) {
+  body {
+    padding-top: 56px;
+  }
+}
+.col-lg-3{
+  margin-left: -100px;
+}
+.row{
+  margin-left: 0px;
+}
+.container2{
+  background-color: rgba(222,222,222,0.05);
+  min-height: 80vh;
+  margin-top: 30px;
+}
+
+.exercise-img{
+  height: 165px;
+}
+
+.input-group-text {
+    padding: .375rem .75rem;
+    margin-bottom: 0;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #e9ecef;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+}
+
+.footer__item .consult_logo img {
+    max-width: 150px;
+}
+.variable-cell{
+    width: 120px;
+}
+.scrollable{
+  position: relative;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.table td, .table th{
+  padding: 0.5em;
+  vertical-align: unset;
+}
+.form-control{
+  padding: .375rem .375rem;
+}
+.subject-list .subject-trophy{
+  height: unset;
+  max-width: unset;
+  /*margin-left: 40px;*/
+  float:right;
+}
+
+.subject-title .subject-trophy{
+  float:right;
+}
+
+ul{
+  list-style: none;
+}
+.solution-interface{
+  min-height: 200px;
+}
+
+h6{
+  /* font-family: "Comic Sans MS", "Comic Sans", cursive; */
+  /*font-family:  'Architects Daughter';*/
+  font-size: 22px;
+    font-family: Bip;
+}
+#exercise-table td:nth-child(odd){
+  background: #eee;
+}
+#exercise-table td:first-child{
+  background: #fff;
+}
+#exercise-table tr:nth-child(even){
+  background: #eee;
+}
+.error-col{
+    background-color: rgba(255, 0, 0, 0.62)!important;
+}
+.abacus-part{
+    height: 300px;
+    width: 100px;
+}
+.big-text{
+    font-size: 18rem;
+}
+
+.trophy-img{
+  height: 50px;
+  width: 50px;
+}
+
+.modal-dialog {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.modal-content {
+    height: auto;
+    min-height: 100%;
+    border-radius: 0;
+}
+.modal-lg{
+    max-width: unset;
+}
+.modal-footer{
+    display: block;
+}
+.big-text-s{
+    font-size: 12rem;
+}

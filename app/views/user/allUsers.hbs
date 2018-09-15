@@ -1,0 +1,239 @@
+<div class="col-md">
+  <div class="card mb-2 flex-row align-items-center">
+    <a class="btn btn-outline-info" href="/">Главная</a> >
+    <a class="btn btn-outline-info" href="/user/allUsers">Поиск Пользователь</a>
+  </div>
+</div>
+
+<div class="col-md-9">
+</div>
+<div class="col-md-7">
+  <div class="card">
+    <div class="card-body">
+      <div class="card">
+        <ul class="list-group list-group-flush">
+          <h6 class="my-0">Поиск Пользователь</h6>
+
+          <div class="form-group">
+            <label for="allUsers">Пользователь</label>
+            <select class="" name="allUsers" id="selectRole" required>
+              <option value="">Пользователь</option>
+            </select><br>
+          </div>
+
+          <div class="form-group">
+              <label for="allUsers">Страна</label>
+              <select class="" name="allUsers" id="selectCountry" required>
+                <option value="">Страна</option>
+              </select><br>
+          </div>
+
+          <div class="form-group">
+              <label for="allUsers">Регион</label>
+              <select class="" name="allUsers" id="selectRegion" required>
+                <option value="">Регион</option>
+              </select><br>
+          </div>
+          <div class="form-group">
+              <label for="allUsers">Филиал</label>
+              <select class="" name="allUsers" id="selectBranch" required>
+                <option value="">Филиал</option>
+              </select><br>
+          </div>
+
+
+
+          <div class="">
+            <button type="button" name="button" onclick="search()">Поиск</button><br><br>
+          </div>
+
+          <div class="form-group">
+            <label for="allUsers"></label>
+            <ul id="users">
+
+            </ul>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div> <!-- .col-sm -->
+
+<div class="col-md-5">
+  <ul class="list-group mb-3">
+    <li class="list-group-item d-flex justify-content-between lh-condensed">
+      <div class="">
+        <h6 class="my-0">По ролям</h6>
+        <li class="list-group-item">
+          <a href="/userList/2" class="btn btn-secondary btn-sm">Менеджеры</a><br/>
+        </li>
+        <li class="list-group-item">
+          <a href="/userList/3" class="btn btn-secondary btn-sm">Мастер франшизы: страна</a><br/>
+        </li>
+        <li class="list-group-item">
+          <a href="/userList/4" class="btn btn-secondary btn-sm">Мастер франшизы: область</a><br/>
+        </li>
+        <li class="list-group-item">
+          <a href="/userList/5" class="btn btn-secondary btn-sm">Администраторы</a><br/>
+        </li>
+        <li class="list-group-item">
+          <a href="/userList/6" class="btn btn-secondary btn-sm">Учителя</a><br/>
+        </li>
+        <li class="list-group-item">
+          <a href="/userList/7" class="btn btn-secondary btn-sm">Ученики</a><br/>
+        </li>
+        <!-- <p id="trophieTitle"></p> -->
+        <p id="tr"></p>
+      </div>
+    </li>
+  </ul>
+</div>
+
+
+
+<script type="text/javascript">
+
+let selectedCountry = undefined;
+let selectedRegion = undefined;
+let selectedBranch = undefined;
+let selectedRole = undefined;
+// let selectedRoleId = "";
+
+//Role List
+$.ajax({
+  url: '/api/user/getRoleList',
+  type: "GET",
+  dataType: "json",
+  success: function (data) {
+    $.each(data, function (i, item) {
+      $.each(item, function(j, role){
+        $('#selectRole').append($('<option>', {
+          value: role.id,
+          text : role.name
+        }));
+      }) // inner loop
+    }); //outer loop
+  }
+});
+//Selected Role
+$('#selectRole').change(function(){
+    selectedRole = this.value
+});
+
+//Select Country
+  $.ajax({
+    url: '/api/user/getCountryList',
+    type: "GET",
+    dataType: "json",
+    success: function (data) {
+      $.each(data, function (i, item) {
+        $.each(item, function(j, country){
+            $('#selectCountry').append($('<option>', {
+                value: country.id,
+                text : country.name
+            }));
+        }) // inner loop
+      }); //outer loop
+    }
+  });
+
+//Select Region by Country
+
+  $('#selectCountry').change(function(){
+    selectedCountry = this.value;
+    url1 = "/api/user/getRegionList/"+this.value;
+    $('#selectRegion').empty();
+
+    $('#selectRegion').append($('<option>', {
+      value: '0',
+      text: 'Регион'
+    }));
+    $.ajax({
+      url: url1,
+      type: "GET",
+      dataType: "json",
+      success: function(data){
+        $.each(data, function (i, item) {
+          $.each(item, function(j, region){
+              $('#selectRegion').append($('<option>', {
+                  value: region.id,
+                  text : region.name
+              }));
+          }) // inner loop
+        }); //outer loop
+      }
+    });
+  });
+
+
+
+  $('#selectRegion').change(function(){
+    selectedRegion = this.value
+    url1 = "/api/user/getBranchList/"+this.value;
+    $('#selectBranch').empty();
+
+    $('#selectBranch').append($('<option>', {
+      value: '0',
+      text: 'Филиал'
+    }));
+    $.ajax({
+      url: url1,
+      type: "GET",
+      dataType: "json",
+      success: function(data){
+        $.each(data, function (i, item) {
+          $.each(item, function(j, branch){
+              $('#selectBranch').append($('<option>', {
+                  value: branch.id,
+                  text : branch.name
+              }));
+
+          }) // inner loop
+        }); //outer loop
+      }
+    });
+  });
+
+  $('#selectBranch').change(function(){
+    selectedBranch = this.value
+    url1 = "ajaxRequest/getRoleList/" + this.value;
+  });
+
+    function search(){
+      data1 = {
+         "selectedCountry":selectedCountry,
+         "selectedRegion":selectedRegion,
+         "selectedBranch":selectedBranch,
+         "selectedRole":selectedRole,
+      }
+      $.ajax({
+        async: false,
+        type: "POST",
+        url: "/api/user/getUsers",
+        data: data1,
+        dataType: "JSON",
+        success: function (res){
+          console.log(JSON.stringify(res));
+          addUsers(res);
+        },
+        error: function(err){
+          console.log(JSON.stringify(err));
+        }
+      });
+    }
+
+
+  function addUsers(data){
+    $('#users').empty();
+      $.each(data, function(j, role){
+        $.each(role,function(i,user){
+          // var users = role.firstname + " " + role.lastname;
+          $('#users').append($("<p>" + "<a href='/user/showUser/" + user.id + "'>" + user.firstname + " " + user.lastname + "</a>" + "</p>", {
+
+          }))
+        })
+
+      }) // inner loop
+    // });
+  }
+</script>

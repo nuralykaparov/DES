@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta charset="utf-8">
+      <title>Colors Game</title>
+      <script type="text/javascript" src="../src/js/jquery-3.3.1.min.js"></script>
+      <link rel="stylesheet" href="../src/css/bootstrap.css">
+      <link rel="stylesheet" href="../src/css/style.css">
+
+
+    </head>
+    <body onload="startNewColorGame()">
+    <header>
+        <div class="custom-head" style="height:20vh;">
+        </div>
+    </header>
+    <main role="main">
+        <div class="container">
+            <div class=" card">
+                <div class="card-body game-bg">
+                    <div id="myProgress">
+                        <div id="progress"></div>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                        <div class="d-flex flex-column">
+                            <a id="exit" href="/games/forMemory" class="btn btn-danger">Выйти</a>
+                        </div>
+                        <button class="btn btn-info" id="restart-btn">Рестарт</button>
+                        <p id="level-text" class="btn btn-success" disabled>Баллы: <span class="score-value"></span></p>
+                    </div>
+                    <div style="min-height: 5vh;"></div>
+                    <!--full game -->
+                    <div class="content" id="color-game-space" >
+                        <div class="text-center">
+                            <h2 id="question" class="font-weight-bold"></h2>
+                            <p id="question-instruction">Выберите цвет которым написано слово</p>
+                        </div>
+                        <div class="row">
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                            <button class="btn btn-outline-secondary question-answer font-weight-bold" style="color: blue;"></button>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                            <button class="btn btn-outline-secondary question-answer font-weight-bold" style="color: red;"></button>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                            <button class="btn btn-outline-secondary question-answer font-weight-bold" style="color: yellow;"></button>
+                        </div>
+                    </div>
+                    </div>
+                    <!-- Demo -->
+                    <div class="content" id="color-game-demo" >
+                        <div id="demo-start">
+                            <div class="text-center">
+                                <h3 id="demo-instruction">Выберите цвет, которым написано слово.</h3>
+                                <h3 id="demo-question" class="font-weight-bold" style="color: blue;">КРАСНЫЙ</h3>
+                            </div>
+
+                            <div style="min-height: 5vh;"></div>
+                            <div class="row">
+                                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                    <button class="btn btn-outline-secondary question-answer-demo font-weight-bold"  onclick="" style="color: red;">ЧЁРНЫЙ</button>
+                                </div>
+                                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                    <button class="btn btn-outline-secondary question-answer-demo font-weight-bold" onclick="" style="color: yellow;">ЖЁЛТЫЙ</button></div>
+                                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                    <button class="btn btn-outline-secondary question-answer-demo font-weight-bold" onclick="finishDemo()" style="color: black;">СИНИЙ</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- .card-body -->
+            </div> <!-- .card -->
+
+            <!-- Game over modal -->
+            <div class="modal fade" id="gameOverModal" tabindex="-1" role="dialog" aria-labelledby="gameOverModal" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">Game Over</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                  Ooops. Your score is <span class="score-value"></span>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+          </div>
+      </div>
+    </div>
+
+        </div>
+    </main>
+    <script type="text/javascript" src="../src/js/script.js"></script>
+    <script type="text/javascript" src="../src/js/color.js"></script>
+    <script>
+    // click on answer btn
+    $(".question-answer").click(function () {
+      if(colorGame.isGameOver){
+        gameOver();
+        return;
+      }
+      var currentColor = this.getAttribute("color-value");
+      currentColor == colorGame.trueColorValue ? winRound() : lostRound();
+    });
+
+    // restart game
+    $("#restart-btn").click(function () {
+      startNewColorGame();
+    });
+
+    // pause game
+    $("#pause-btn").click(function () {
+      // clearInterval(colorGame.intervalId);
+      stopTime();
+    });
+    $("#start-timer-btn").click(function () {
+      // clearInterval(colorGame.intervalId);
+      startTimer();
+    });
+    </script>
+    </body>
+</html>

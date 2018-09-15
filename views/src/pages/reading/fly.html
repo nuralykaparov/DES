@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Fly</title>
+  <link rel="stylesheet" href="../src/css/bootstrap.css">
+  <link rel="stylesheet" href="../src/css/style.css">
+  <script type="text/javascript" src="../src/js/script.js"></script>
+  <script type="text/javascript" src="../src/js/fly.js"></script>
+</head>
+<body>
+
+<header>
+
+</header>
+<main role="main">
+  <div class="container" id="inner-content">
+    <div class="card">
+      <div class="card-body game-bg">
+
+        <div class="d-flex justify-content-between align-items-center mt-3">
+            <div class="d-flex flex-column">
+                <a id="exit" href="/games/forRead" class="btn btn-danger">Выйти</a>
+            </div>
+        </div>
+
+        <div class="flex justify-content-center">
+          <div class="content" id="fly-game-space">
+          </div>
+        </div>
+
+      </div>
+    </div>
+    </div>
+
+</main>
+
+
+<script type="text/javascript">
+  let fg = new FlyGame();
+  fg.initGameSpace();
+</script>
+</body>
+</html>

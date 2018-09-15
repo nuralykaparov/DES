@@ -1,0 +1,33 @@
+<div class="container">
+
+    <div class="row d-flex justify-content-center" >
+        <div class="col-sm-7">
+            <div class="card">
+                <div class="card-body">
+
+                    {{#if message.length }}
+                    <div class="alert alert-danger">{{ message }}</div>
+                    {{/if}}
+                    <p class="mt-4 lead text-center">
+                       Sign in to access your Authority account
+                    </p>
+                    <div class="mt-4">
+                        <form action="signin" method="post">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="username" name="username" placeholder="username" autofocus>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" id="password" value="" name="password" placeholder="password">
+                            </div>
+                            <a href="/forgotPassword">Forgot password?</a>
+                            <input type="submit" class="btn btn-primary float-right" value="Login"/>
+                        </form>
+                        <div class="clearfix"></div>
+                        <p class="content-divider center mt-4"><span></span></p>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- .col-sm- -->
+
+    </div>
+</div>

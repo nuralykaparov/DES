@@ -1,0 +1,64 @@
+
+<div class="container">
+
+  <div class="row">
+
+    <div class="col-lg-3">
+      <div class="list-group">
+        <a href="/" class="list-group-item"> Back</a>
+
+
+      </div>
+    </div>
+    <div class="col-md-7">
+  <div class="card">
+    <div class="card-body">
+      
+        <ul class="list-group list-group-flush">
+          <div class="col-sm-6">
+            <h2 class="my-0">User Profile</h6>
+
+            {{#if message.length  }}
+                <div class="alert alert-danger">{{ message }}</div>
+            {{/if }}
+
+              <div class="well">
+                  <table>
+                    <tr>
+                      <td>username</td>
+                      <td>:{{ user.username }}</td>
+                    <tr>
+                    </tr>
+                      <td>Name: </td>
+                      <td>:{{ user.name }}</td>
+                    </tr>
+                    <tr>
+                      <td>Surname</td>
+                      <td>:{{ user.surname }}</td>
+                    </tr>
+                    <tr>
+                      <td>Email</td>
+                      <td>:{{ user.email }}</td>
+                    </tr>
+
+                  </table>
+              </div>
+          </div>
+        </ul>
+     
+    </div>
+  </div>
+</div>
+<div class="col-md-2">
+  <ul class="list-group mb-3">
+    <li class="list-group-item d-flex justify-content-between lh-condensed">
+      <div class="">
+        <a href="/user/editPasswordUser/{{user.id}}" class="btn btn-default btn-sm" >Edit Password</a><br>
+        <a href="/user/editUser/{{user.id}}" class="btn btn-default btn-sm" >Edit</a><br>
+        </form>
+      </div>
+    </li>
+    </li>
+  </div>
+</div>
+</div>

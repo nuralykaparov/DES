@@ -1,0 +1,189 @@
+
+<div class="container">
+
+  <div class="row">
+
+    <div class="col-lg-3">
+      <div class="list-group">
+        <a href="/" class="list-group-item"> Home</a>
+        {{#if_eq user.userRoleId 2}}
+        <a href="/user/archieve" class="list-group-item">E-archive list</a>
+        <a href="/user/inboxDocs" class="list-group-item">Inbox Docs</a>
+        {{/if_eq}}
+
+        {{#if_eq user.userRoleId 1}}
+        <a href="/user/archieve" class="list-group-item">E-archive list</a>
+        <a href="/user/createUser" class="list-group-item active">Create User</a>
+        <a href="/user/myDocs" class="list-group-item"> My documents</a>
+        <a href="/user/createDocsView" class="list-group-item">Upload Document</a>
+        <a href="/user/inboxDocs" class="list-group-item">Inbox Docs</a>
+        {{/if_eq}}
+
+        {{#if_eq user.userRoleId 3}}
+        <a href="/user/myDocs" class="list-group-item"> My documents</a>
+        <a href="/user/createDocsView" class="list-group-item">Upload Document</a>
+        <a href="/user/inboxDocs" class="list-group-item">Inbox Docs</a>
+        {{/if_eq}}
+
+
+      </div>
+    </div>
+<div class="col-lg-9">
+<div class="col-md-9">
+</div>
+<div class="col-md-7">
+  <div class="card">
+    <div class="card-body">
+      <div class="card">
+        <ul class="list-group list-group-flush">
+          <div class="col-sm-6 col-sm-offset-3">
+
+              <form id="signup" name="signup" method="post" action="/user/createUser">
+                  <div class="form-group">
+                        <label for="newUsername">Username</label>
+                        <input  class="form-control" name="username" type="text" value="{{newUser.username}}"/>
+                  </div>
+                  <div class="form-group">
+                      <label for="newPassword">Name</label>
+                      <input name="name" type="text" class="form-control" />
+                  </div>
+                  <div class="form-group">
+                      <label for="newPassword">Surname</label>
+                      <input name="surname" type="text" class="form-control" />
+                  </div>
+                  <div class="form-group">
+                      <label for="newPassword">Email</label>
+                      <input name="email" type="text" class="form-control" />
+                  </div>
+                  <div class="form-group">
+                      <label for="newPassword">Password</label>
+                      <input name="password" type="password" class="form-control" />
+                  </div>
+                  <div class="form-group">
+                      <label for="newUserRoleId">Role</label>
+                      <select class="" name="roleId">
+                        {{#each rolesList}}
+                          <option value="{{id}}">{{{name}}}</option>
+                        {{/each}}
+                      </select><br>
+                  </div>
+                  <button class="btn btn-warning btn-lg" type="submit" >Create</button>
+              </form>
+              <hr>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div> <!-- .col-sm -->
+</div></div></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+//Select Country
+  $.ajax({
+    url: '/api/user/getCountryList',
+    type: "GET",
+    dataType: "json",
+    success: function (data) {
+      $.each(data, function (i, item) {
+        $.each(item, function(j, country){
+            $('#selectCountry').append($('<option>', {
+                value: country.id,
+                text : country.name
+            }));
+        }) // inner loop
+      }); //outer loop
+    }
+  });
+
+//Select Region by Country
+
+  $('#selectCountry').change(function(){
+    var selectedCountry = this.value
+    console.log(selectedCountry);
+    url1 = "/api/user/getRegionList/"+this.value;
+    $('#selectRegion').empty();
+
+    $('#selectRegion').append($('<option>', {
+      value: '0',
+      text: 'Регион'
+    }));
+    $.ajax({
+      url: url1,
+      type: "GET",
+      dataType: "json",
+      success: function(data){
+        $.each(data, function (i, item) {
+          $.each(item, function(j, region){
+              $('#selectRegion').append($('<option>', {
+                  value: region.id,
+                  text : region.name
+              }));
+          }) // inner loop
+        }); //outer loop
+      }
+    });
+  });
+
+
+  $('#selectRegion').change(function(){
+    var selectedRegion = this.value
+    console.log(selectedRegion);
+    url1 = "/api/user/getBranchList/"+this.value;
+    $('#selectBranch').empty();
+
+    $('#selectBranch').append($('<option>', {
+      value: '0',
+      text: 'Филиал'
+    }));
+
+    $.ajax({
+      url: url1,
+      type: "GET",
+      dataType: "json",
+      success: function(data){
+        $.each(data, function (i, item) {
+          $.each(item, function(j, branch){
+              $('#selectBranch').append($('<option>', {
+                  value: branch.id,
+                  text : branch.name
+              }));
+
+          }) // inner loop
+        }); //outer loop
+      }
+    });
+  });
+
+</script>

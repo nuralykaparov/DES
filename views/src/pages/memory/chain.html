@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Chain Game</title>
+
+    <link rel="stylesheet" href="../src/css/bootstrap.css">
+    <link rel="stylesheet" href="../src/css/style.css">
+
+  </head>
+  <body>
+  <header>
+    <div class="custom-head" style="height:15vh;"></div>
+  </header>
+  <main role="main">
+    <div class="container">
+      <div class="card">
+        <div class="card-body game-bg">
+          <div class="container" id="chain-game-space">
+            <!-- header -->
+            <div class="d-flex justify-content-between align-items-center mb-5">
+              <a id="exit" href="/games/forMemory" class="btn btn-danger">Выйти</a>
+              <button class="btn btn-info" id="restart-btn">Рестарт</button>
+              <p id="level-text" class="btn btn-success" disabled>Уровень: <span id="level-value"></span></p>
+            </div>
+            <!-- words to memorize -->
+            <div class="game-arena" id="game-view" style="display: none">
+              <div class="d-flex justify-content-center" id="viewWord">
+                  <div class="flex-column text-center">
+                      <h3 id="current-word" class="words-bg"></h3>
+                      <button class="btn btn-outline-success fix-btn mt-3"
+                              id="next-word-button" onclick="showNextWord()">Следующий</button>
+                  </div>
+              </div>
+            </div>
+            <!-- answers -->
+            <div class="game-arena" id="answer-view" style="display: none">
+              <div class="d-flex flex-column">
+                <div class="answer-btn-space d-flex flex-column"></div> <!-- filled with js -->
+                <div class="d-flex justify-content-center mt-3">
+                  <button class="btn btn-outline-success fix-btn" id="show-result-btn" disabled="" >Проверить</button>
+                </div>
+              </div>
+            </div>
+            <!-- result -->
+            <div class="game-arena" id="result-view" style="display: none">
+                <div class="d-flex flex-column">
+                    <div class="result-space d-flex flex-column text-center"></div> <!-- filled with js -->
+                  <div class="d-flex justify-content-center mt-3">
+                    <button class="btn btn-outline-danger fix-btn"
+                            id="finish-level" style="align-self: center">Закончить</button>
+                  </div>
+                </div>
+            </div>
+            <!-- description -->
+            <div class="game-arena" id="game-desc-view">
+                <div class="d-flex justify-content-center">
+                    <div class="flex-column text-center">
+                        <h4  class="text-justify">
+                          Приступим к запоминанию!
+                          Прием запоминания методом Цепочка. <br><br>
+                          На экран по порядку будут выводиться слова. <br>
+                          Слова запоминаются следующим образом: первое слово мысленно соединяется со вторым,
+                          второе с третьим, третье с четвертым и т.д. Получается, что слова соединяются так же, как звенья в цепочке,
+                          отсюда и название метода. <br>
+                          Вам необходимо образыв слов соединять парами: в воображении одновременно должны быть только два образа,
+                          всю цепочку разом представлять не нужно. Для того чтобы при вспоминании ыло легко вспомнить порядок слов,
+                          образ второго слова помещайте в воображении сверху первого, в правой части первого, либо второй образ должен
+                          проникать в первый. <br>
+                          Образы в парах следуют представлять примерно одинакового размера. Образы обязательно должны контактировать.
+                        </h4>
+
+                        <button class="btn btn-success fix-btn" id="close-desc" >Начать</button>
+                    </div>
+                </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script type="text/javascript" src="../src/js/jquery-3.3.1.min.js"></script>
+
+  <script type="text/javascript" src="../src/js/script.js"></script>
+  <script type="text/javascript" src="../src/js/chain.js"></script>
+  <script type="text/javascript">
+
+    initChainGame();
+    $(document).on('click', ".answer-word-btn", function() {
+      this.style.color = "yellow";
+      this.disabled = true;
+      chainGame.registeredAnswers.push(this.innerText);
+
+      if(chainGame.registeredAnswers.length === chainGame.currentWordsList.length){
+        $("#show-result-btn").prop("disabled",false);
+      }
+    });
+    $("#show-result-btn").click(function () {
+      showResultView();
+    });
+    $("#finish-level").click(function () {
+      console.log("finish level");
+      finishLevel();
+    });
+    $("#close-desc").click(function () {
+      closeDesc();
+    })
+  </script>
+  </body>
+</html>
