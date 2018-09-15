@@ -7,7 +7,6 @@ module.exports = {
         name: "Admin",
         surname: "Admin",
         password: pass,
-        email: "nuraly.kaparov@iaau.edu.kg",
         userRoleId: 1,
         createdAt: new Date(),
         updatedAt: new Date()

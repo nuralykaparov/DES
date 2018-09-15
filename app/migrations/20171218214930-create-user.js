@@ -19,9 +19,6 @@ module.exports = {
       surname: {
         type: Sequelize.STRING
       },
-      email: {
-        type: Sequelize.STRING
-      },
       userRoleId: {
         type: Sequelize.INTEGER,
         onDelete: 'CASCADE',

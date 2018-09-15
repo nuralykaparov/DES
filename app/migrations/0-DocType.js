@@ -1,25 +1,15 @@
+'use strict';
 module.exports = {
     up: (queryInterface, Sequelize) => {
-        return queryInterface.createTable('UserToDocs', {
+        return queryInterface.createTable('DocTypes', {
             id: {
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
-            url: {
-                type: Sequelize.STRING
-            },
             name: {
                 type: Sequelize.STRING
-            },
-            userId: {
-                type: Sequelize.INTEGER,
-                onDelete: 'CASCADE',
-                references: {
-                    model: 'Users',
-                    key: 'id'
-                }
             },
             createdAt: {
                 allowNull: false,
@@ -32,6 +22,6 @@ module.exports = {
         });
     },
     down: (queryInterface, Sequelize) => {
-        return queryInterface.dropTable('UserToDocs');
+        return queryInterface.dropTable('DocTypes');
     }
 };

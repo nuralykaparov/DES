@@ -18,6 +18,7 @@ module.exports = function(sequelize, DataTypes) {
     UserToDoc.belongsTo(models.User,{
       foreignKey: 'userId'
     });
+
     UserToDoc.hasMany(models.SendDocToUser,{
       foreignKey: {
         name: 'id',
