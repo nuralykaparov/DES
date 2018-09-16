@@ -6,8 +6,10 @@
       <div class="list-group">
         <a href="/" class="list-group-item"> Home</a>
         {{#if_eq user.userRoleId 2}}
-          <a href="/user/archieve" class="list-group-item">E-archive list</a>
+          <a href="/user/archieve" class="list-group-item active">E-archive list</a>
           <a href="/user/inboxDocs" class="list-group-item">Inbox Docs</a>
+          <a href="/user/myDocs" class="list-group-item"> My documents</a>
+          <a href="/user/createDocsView" class="list-group-item">Upload Document</a>
         {{/if_eq}}
 
         {{#if_eq user.userRoleId 1}}
@@ -27,7 +29,7 @@
 
       </div>
     </div>
-    <div class="col-lg-9">
+    <div class="col-lg-10">
       <div class="card">
         <div class="card-body">
           <h4>My Documents</h4>
@@ -39,6 +41,7 @@
               <th>Document Type</th>
               <th>Download link</th>
               <th>Send to</th>
+              <th>Task</th>
               <th></th>
               <thead>
               <tbody>
@@ -62,6 +65,9 @@
                             <option value="{{id}}">{{username}}</option>
                           {{/each}}
                         </select>
+                        <br>
+                        Task:
+                        <input type="text" name="message">
                         <button class="" type="submit">Send</button>
                       </form>
                       <br>

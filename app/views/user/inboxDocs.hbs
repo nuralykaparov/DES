@@ -1,4 +1,3 @@
-
 <div class="container">
 
   <div class="row">
@@ -7,22 +6,25 @@
       <div class="list-group">
         <a href="/" class="list-group-item"> Home</a>
         {{#if_eq user.userRoleId 2}}
-        <a href="/user/archieve" class="list-group-item">E-archive list</a>
-        <a href="/user/inboxDocs" class="list-group-item active">Inbox Docs</a>
+          <a href="/user/archieve" class="list-group-item">E-archive list</a>
+          <a href="/user/createUser" class="list-group-item">Create User</a>
+          <a href="/user/myDocs" class="list-group-item"> My documents</a>
+          <a href="/user/createDocsView" class="list-group-item">Upload Document</a>
+          <a href="/user/inboxDocs" class="list-group-item active">Inbox Docs</a>
         {{/if_eq}}
 
         {{#if_eq user.userRoleId 1}}
-        <a href="/user/archieve" class="list-group-item">E-archive list</a>
-        <a href="/user/createUser" class="list-group-item">Create User</a>
-        <a href="/user/myDocs" class="list-group-item"> My documents</a>
-        <a href="/user/createDocsView" class="list-group-item">Upload Document</a>
-        <a href="/user/inboxDocs" class="list-group-item active">Inbox Docs</a>
+          <a href="/user/archieve" class="list-group-item">E-archive list</a>
+          <a href="/user/createUser" class="list-group-item">Create User</a>
+          <a href="/user/myDocs" class="list-group-item"> My documents</a>
+          <a href="/user/createDocsView" class="list-group-item">Upload Document</a>
+          <a href="/user/inboxDocs" class="list-group-item active">Inbox Docs</a>
         {{/if_eq}}
 
         {{#if_eq user.userRoleId 3}}
-        <a href="/user/myDocs" class="list-group-item"> My documents</a>
-        <a href="/user/createDocsView" class="list-group-item">Upload Document</a>
-        <a href="/user/inboxDocs" class="list-group-item active">Inbox Docs</a>
+          <a href="/user/myDocs" class="list-group-item"> My documents</a>
+          <a href="/user/createDocsView" class="list-group-item">Upload Document</a>
+          <a href="/user/inboxDocs" class="list-group-item active">Inbox Docs</a>
         {{/if_eq}}
 
       </div>
@@ -32,38 +34,39 @@
     <div class="col-lg-9">
       <div class="card">
         <div class="card-body">
-        <h4>Inbox Documents</h4>
-        <div class="table-responsive">
-          <table id="mytable" class="table table-bordred table-stipped">
-            <thead>
+          <h4>Inbox Documents</h4>
+          <div class="table-responsive">
+            <table id="mytable" class="table table-bordred table-stipped">
+              <thead>
               <th>File name</th>
               <th>Download</th>
               <th>Sended User</th>
-              {{#if_eq u.userRoleId 2}}
-              <th>Archieve</th>
-              {{/if_eq}}
-            <thead>
-        <tbody>
-          {{#each text}}
-          <tr>
-            <td>{{UserToDoc.name}}</td>
-            <td><a href="/user/downloadDoc/{{UserToDoc.id}}">Download</a></td>
-            <td>{{UserToDoc.User.username}}</td>
-
-            {{#if_eq ../user.userRoleId 2}}
-            <td><a href="/user/addToArchieve/{{UserToDoc.id}}/{{UserToDoc.userId}}">Add to Archieve</a></td>
-            {{/if_eq}}
-        </tr>
-        {{/each}}
-        </tbody>
-        </table>
+              <th>Task</th>
+              <th>Status</th>
+              <th></th>
+              <thead>
+              <tbody>
+              {{#each text}}
+                <tr>
+                  <td>{{UserToDoc.name}}</td>
+                  <td><a href="/user/downloadDoc/{{UserToDoc.id}}">Download</a></td>
+                  <td>{{UserToDoc.User.username}}</td>
+                  <td>{{msg}}</td>
+                  <td>{{Status.name}}</td>
+                  <td>
+                    
+                  </td>
+                </tr>
+              {{/each}}
+              </tbody>
+            </table>
+          </div>
         </div>
+
+      </div>
     </div>
 
-  </div>
-  </div>
 
-
-</div>
+  </div>
 </div>
 </div>

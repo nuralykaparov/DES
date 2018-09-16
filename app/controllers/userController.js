@@ -51,35 +51,55 @@ exports.archieve = function (req, res) {
   let UserToDoc = models.UserToDoc;
   let arr = [];
   let docIds = [];
-  Archieve.findAll().then(function (data) {
-    for (var i = 0; i < data.length; i++) {
-      arr.push(data[i].sendUserId);
-      docIds.push(data[i].docId);
-    }
-    UserToDoc.findAll({where: {id: {[Op.in]: docIds}}}).then(function (docs) {
-      User.findAll({where: {id: {[Op.in]: arr}}}).then(function (userList) {
-        User.findOne({where: {id: req.user.id}}).then(function (user) {
+
+  userToDoc.findAll().then(function (docList) {
+    User.findAll().then(function (userList) {
+      User.findOne({where: {id: req.user.id}}).then(function (user) {
+        DocTypes.findAll().then((docTypes) => {
           res.render('user/archive', {
-            d: data,
-            archive: docs,
+            docTypes: docTypes,
+            docList: docList,
             userList: userList,
             user: user
-          })
+          });
         })
       })
     })
   })
+
+  // Archieve.findAll().then(function (data) {
+  //   for (var i = 0; i < data.length; i++) {
+  //     arr.push(data[i].sendUserId);
+  //     docIds.push(data[i].docId);
+  //   }
+  //   UserToDoc.findAll({where: {id: {[Op.in]: docIds}}}).then(function (docs) {
+  //     User.findAll({where: {id: {[Op.in]: arr}}}).then(function (userList) {
+  //       User.findOne({where: {id: req.user.id}}).then(function (user) {
+  //         res.render('user/archive', {
+  //           d: data,
+  //           archive: docs,
+  //           userList: userList,
+  //           user: user
+  //         })
+  //       })
+  //     })
+  //   })
+  // })
 }
 
 exports.createDocToUser = function (req, res) {
-  let userId = req.body.userId;
-  let docId = req.body.docId;
-  let sendUserId = req.user.id;
+  const userId = req.body.userId;
+  const docId = req.body.docId;
+  const sendUserId = req.user.id;
+  const msg = req.body.message;
+  const statusId = 1;
 
-  data = {
+  const data = {
     sendUserId: sendUserId,
     getUserId: userId,
-    docId: docId
+    docId: docId,
+    msg: msg,
+    statusId: statusId
   }
 
   console.log("----------------------")
@@ -96,7 +116,7 @@ exports.createDocToUser = function (req, res) {
       res.redirect("/user/myDocs")
     }
   })
-}
+};
 
 exports.search = function (req, res) {
   let User = models.User;
@@ -180,43 +200,50 @@ exports.search = function (req, res) {
 //   })
 // }
 exports.inboxDocs = function (req, res) {
+  let Statuse = models.Status;
   let userId = req.user.id;
   let User = models.User;
   let UserToDoc = models.UserToDoc;
-  // let userIds = []
-  // let docIds = [];
-  // let userArr = [];
-  // let data = []
-  let allDocs = [];
-  let docList = [];
-  let userArr = [];
-  let arr = [];
-  let a = ['1']
 
   sendDocToUser.findAll({
     where: {getUserId: userId},
-    // attributes:["id"],
-    include: [{
-      model: models.UserToDoc,
-      // attributes: ["id","url","name"],
-      on: {id: {$eq: models.sequelize.col('SendDocToUser.docId')}},
-      include: [{
-        model: models.User,
-        // attributes: ["id","name","surname"],
-        on: {id: {$eq: models.sequelize.col("UserToDoc.userId")}}
-      }]
-    }],
+    include: [
+      {
+        model: models.UserToDoc,
+        on: {id: {$eq: models.sequelize.col('SendDocToUser.docId')}},
+        include: [{
+          model: models.User,
+          on: {id: {$eq: models.sequelize.col("UserToDoc.userId")}},
+        }],
+      },
+      {
+        model: models.Status,
+        on: {id: {$eq: models.sequelize.col('SendDocToUser.statusId')}},
+      }
+    ]
   }).then(function (sendDocList) {
-    console.log(sendDocList);
     User.findOne({where: {id: req.user.id}}).then(function (user1) {
-      res.render('user/inboxDocs', {
-        text: sendDocList,
-        user: user1
-      });
+      Statuse.findAll().then( (statuses) => {
+        console.log(JSON.stringify(sendDocList, null, 4));
+        res.render('user/inboxDocs', {
+          text: sendDocList,
+          user: user1,
+          statuses: statuses
+        });
+      })
     })
   });
 }
 
+exports.updateInboxDoc = (req,res) => {
+  const docId = req.body.docId;
+  const statusId = req.body.statusId;
+  let SendDocToUser = models.SendDocToUser;
+}
+// include: [{
+//   model: models.Status,
+//   on: {id: {$eq: models.sequelize.col('SendDocToUser.statusId')}},
+// }]
 
 // accessLevel: {[Op.gt]: userRole.get().accessLevel}
 
