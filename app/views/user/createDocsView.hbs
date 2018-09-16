@@ -30,6 +30,22 @@
     <div class="card-body">
       <form class="fileupload" action="/user/createDocs" method="post" enctype="multipart/form-data">
             <h1>Upload File Here</h1>
+              <div class="form-group">
+                  <label for="name">Name</label>
+                  <input required name="name" type="text" class="form-control"/>
+              </div>
+              <div class="form-group">
+                  <label for="description">Description</label>
+                  <input required name="description" type="text" class="form-control"/>
+              </div>
+              <div class="form-group">
+                  <label for="newUserRoleId">Document Type</label>
+                  <select required class="" name="docTypeId">
+                      {{#each docTypeList}}
+                          <option required value="{{id}}">{{{name}}}</option>
+                      {{/each}}
+                  </select><br>
+              </div>
             <input type="file" id="file" name="upfile" value="">
             <input type="submit" />
       </form>

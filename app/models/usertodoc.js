@@ -23,7 +23,7 @@ module.exports = function (sequelize, DataTypes) {
             foreignKey: 'userId'
         });
 
-        SendDocToUser.belongsTo(models.DocType, {
+        UserToDoc.belongsTo(models.DocType, {
             foreignKey: 'docTypeId',
         });
 
