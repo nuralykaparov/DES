@@ -5,10 +5,10 @@
         <div class="col-lg-3">
             <div class="list-group">
                 <a href="/" class="list-group-item"> Home</a>
-                {{#if_eq user.userRoleId 2}}
+                <!-- {{#if_eq user.userRoleId 2}}
                     <a href="/user/archieve" class="list-group-item">E-archive list</a>
                     <a href="/user/inboxDocs" class="list-group-item">Inbox Docs</a>
-                {{/if_eq}}
+                {{/if_eq}} -->
 
                 {{#if_eq user.userRoleId 1}}
                     <a href="/user/archieve" class="list-group-item">E-archive list</a>
@@ -18,7 +18,7 @@
                     <a href="/user/inboxDocs" class="list-group-item">Inbox Docs</a>
                 {{/if_eq}}
 
-                {{#if_eq user.userRoleId 3}}
+                {{#if_eq user.userRoleId 2}}
                     <a href="/user/myDocs" class="list-group-item"> My documents</a>
                     <a href="/user/createDocsView" class="list-group-item">Upload Document</a>
                     <a href="/user/inboxDocs" class="list-group-item">Inbox Docs</a>
